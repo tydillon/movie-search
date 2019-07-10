@@ -10,7 +10,7 @@ function App() {
 
   const handleChange = e => {
     setCriteria(e.target.value)
-    if (criteria === '') {
+    if (!criteria.replace(/\s/g, '').length) {
       setButtonVal(true)
     } else {
       setButtonVal(false)
@@ -23,11 +23,14 @@ function App() {
   }
 
   const searchMovies = criteria => {
-    return fetch(`https://movie-search.jrs.camp?q=${encodeURI(criteria)}`, {
-      headers: {
-        authorization: `Bearer ${token}`
+    return fetch(
+      `https://movie-search.jrs.camp?q=${encodeURI(criteria.trim())}`,
+      {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
       }
-    }).then(response => response.json())
+    ).then(response => response.json())
   }
 
   const token =
@@ -42,7 +45,7 @@ function App() {
   }
 
   const handleValidation = () => {
-    if (criteria === '') {
+    if (!criteria.replace(/\s/g, '').length) {
       setValid(false)
       setButtonVal(true)
     } else {
