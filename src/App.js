@@ -30,7 +30,7 @@ function App() {
         <div className="columns">
           <div className="column">
             <h1 className="title">Movie Search</h1>
-            <Form onSearch={handleSearch} />
+            <Form onSearch={handleSearch} movies={results} />
           </div>
           <div className="column">
             <Result movies={results} />

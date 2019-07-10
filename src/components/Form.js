@@ -1,8 +1,15 @@
 import React, { useState } from 'react'
-
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxList,
+  ComboboxOption,
+  ComboboxPopover
+} from '@reach/combobox'
+import { map } from 'ramda'
 export default Form
 
-function Form({ onSearch }) {
+function Form({ onSearch, movies }) {
   const [buttonVal, setButtonVal] = useState(true)
   const [valid, setValid] = useState(true)
   const [criteria, setCriteria] = useState('')
@@ -39,24 +46,36 @@ function Form({ onSearch }) {
     }
   }
 
+  const makeDropdown = movie => {
+    return <ComboboxOption value={movie.Title} key={movie.imdbID} />
+  }
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       <div className="field">
         <label className="label">Name:</label>
-        <div className="control">
-          <input
-            type="text"
-            className={`input ${checkValid()}`}
-            onChange={handleChange}
-            onBlur={handleValidation}
-          />
-        </div>
+        <Combobox>
+          <div className="control">
+            <ComboboxInput
+              aria-labelledby="demo"
+              type="text"
+              className={`input ${checkValid()}`}
+              onChange={handleChange}
+              onBlur={handleValidation}
+              style={{ width: '80%' }}
+            />
+            <button disabled={buttonVal} className="button is-primary">
+              Search
+            </button>
+          </div>
+          <ComboboxPopover>
+            <ComboboxList aria-labelledby="demo">
+              {map(makeDropdown, movies)}
+            </ComboboxList>
+          </ComboboxPopover>
+        </Combobox>
+
         <div className="help">Please enter the name of a movie</div>
-      </div>
-      <div className="field">
-        <button disabled={buttonVal} className="button is-primary">
-          Search
-        </button>
       </div>
     </form>
   )
