@@ -22,6 +22,7 @@
 
 ## Set up state with hooks
 
+- import {useState} within react
 - Set a new array equal to useState(defaultvalue). First value in array is the variable to hold state, second is a function used to set the state
 - Set value of input to critera and set onChange of input to a function called handleChange
 - write a function called handleChange. Within that function, use the state-setting function and invoke it with the value from the input (you can check if it's working with react developer tools)
@@ -45,12 +46,12 @@ headers: {
 
 - Convert response to JSON
 - Within the handleSubmit function, call the searchMovie function with the criteria.
-- .then console log the results to make sure it worked
+- .then console log the results to make sure it worked (within the handleSubmit function)
 
 ## Display the movie info
 
 - Within the app function, make another hook for the results. Default is an empty array
-- Back in the handleSubmit function, run the setter function for the results, pass in the result.Search
+- Back in the handleSubmit function, run the setter function for the results, pass in the result.Search (do this as a .then)
 - Make a new div under the button with the class box.
 - Make a ul
 - Import map from ramda
